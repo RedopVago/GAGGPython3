@@ -1,9 +1,10 @@
 #import pickle
 import shelve
 #import sys
-from idestudiante import estudiante as est
+# from idestudiante import estudiante as est  # [PV] Error en el nombre del Modulo
+from IDestudiante2 import estudiante as est
 #import os
-import mydict
+# import mydict
 from mongoengine import *
 from datetime import datetime
 
@@ -17,6 +18,7 @@ class Estudiante(Document):
     materias = StringField(required=True)
     asistencia = ListField(DateTimeField())
 
+
 def subir(file,key):
     objeto=file[key]
     nombre, correo, contraseña, materias = objeto.getDatos()
@@ -27,6 +29,7 @@ def subir(file,key):
         materias=materias
     )
     estudiante.save()
+
 
 def registro(file):
     print("Introduce el nombre del estudiante:")
@@ -48,6 +51,7 @@ def lectura(file,nombre):
     lectura=file[nombre]
     print(f'Los datos del estudiante son: {lectura.getDatos()}')
 
+
 def actualizar(file,nombre):
     print("Introduce el nuevo nombre del estudiante:")
     renombre = input()
@@ -66,9 +70,12 @@ def actualizar(file,nombre):
 
     print(f"Nombre actualizado: {renombre}\nCorreo actualizado: {correo}\nContraseña actualizada: {contraseña}\nMateria actualizada: {materias}\n ")
     return renombre
+
+
 def eliminar(file,nombre):
     del file[nombre]
     print("Nombre eliminado")
+
 
 if __name__ == '__main__':
     print('hola')
